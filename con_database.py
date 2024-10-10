@@ -76,7 +76,7 @@ def create_table():
         activo           TEXT,
         id_sucursal     INTEGER,
         id_permiso      INTEGER,
-        FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal),
+        FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
     );
     """
     table_sucursales="""
