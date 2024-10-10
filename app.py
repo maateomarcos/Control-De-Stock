@@ -10,6 +10,7 @@ from con_database import *
 
 # NOMBRE EMPRESA: HAWK  
 # RUBRO: INDUMENTARIA Y CALZADO  
+# tu vieja
 
 class Application:  
     ''' 
