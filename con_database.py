@@ -88,15 +88,7 @@ def create_table():
         telefono_sucursal VARCHAR(20) NOT NULL  
     );
     """
-    table_permisos = """
-    CREATE TABLE IF NOT EXISTS permisos (
-        id_permiso INT PRIMARY KEY,
-        nombre_permiso VARCHAR(50) NOT NULL,
-        descripcion_permiso TEXT,
-        id_usuario      INTEGER,
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-    );
-    """
+
     table_usuarios="""
     CREATE TABLE IF NOT EXISTS usuarios (
         id_usuario INT PRIMARY KEY,
@@ -111,22 +103,7 @@ def create_table():
         FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
     );
     """
-    insert_permisos = """
-    INSERT OR IGNORE INTO permisos (id_permiso, nombre_permiso, descripcion_permiso)
-    VALUES
-    (1, 'Admin', 'Permiso de administrador'),
-    (2, 'Gerente', 'Permiso de gerente'),
-    (3, 'Empleado', 'Permiso de empleado');
-    """
-    table_usuario_permisos = """
-    CREATE TABLE IF NOT EXISTS usuario_permisos (
-        id_usuario INT,
-        id_permiso INT,
-        PRIMARY KEY (id_usuario, id_permiso),
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
-        FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso)
-    );
-    """
+    
 
     '''
     COMO QUEDARIA LA BASE DE DATOS (GRAFICADA)
@@ -202,10 +179,7 @@ def create_table():
             con = connection.cursor()
             con.execute(table)
             con.execute(table_sucursales)
-            con.execute(table_permisos)
             con.execute(table_usuarios)
-            con.execute(insert_permisos)
-            con.execute(table_usuario_permisos)
     except Error as e:
         print(e)
 
