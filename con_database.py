@@ -77,7 +77,6 @@ def create_table():
         id_sucursal     INTEGER,
         id_permiso      INTEGER,
         FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal),
-        FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso)
     );
     """
     table_sucursales="""
@@ -93,87 +92,15 @@ def create_table():
     CREATE TABLE IF NOT EXISTS usuarios (
         id_usuario INT PRIMARY KEY,
         nombre_usuario VARCHAR(50) NOT NULL,
-        apellido_usuario VARCHAR(50) NOT NULL,
+        user VARCHAR(50) NOT NULL,
         email_usuario VARCHAR(100) NOT NULL,
         password_usuario VARCHAR(255) NOT NULL,
         nivel_permiso VARCHAR(20) NOT NULL,
         id_sucursal INT NOT NULL,
-        id_permiso INT NOT NULL,
-        FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso),
         FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
     );
     """
-    
 
-    '''
-    COMO QUEDARIA LA BASE DE DATOS (GRAFICADA)
-    +---------------+
-    |  Sucursales  |
-    +---------------+
-    |  id_sucursal  |
-    |  nombre_sucursal|
-    |  direccion_sucursal|
-    |  telefono_sucursal|
-    +---------------+
-
-    +---------------+
-    |  Permisos    |
-    +---------------+
-    |  id_permiso  |
-    |  nombre_permiso|
-    |  descripcion_permiso|
-    +---------------+
-
-    +---------------+
-    |  Usuarios    |
-    +---------------+
-    |  id_usuario  |
-    |  nombre_usuario|
-    |  apellido_usuario|
-    |  email_usuario|
-    |  password_usuario|
-    |  id_permiso  |
-    |  id_sucursal |
-    +---------------+
-
-    +---------------+
-    |  Stock       |
-    +---------------+
-    |  id          |
-    |  producto    |
-    |  grupo       |
-    |  medida      |
-    |  lote        |
-    |  stock       |
-    |  valor_stock |
-    |  stock_mín   |
-    |  status      |
-    |  proveedor   |
-    |  responsable |
-    |  entradas    |
-    |  fecha_entrada|
-    |  costo_unitario|
-    |  costo_total |
-    |  salidas     |
-    |  fecha_salida|
-    |  valor_venta |
-    |  facturación |
-    |  reponer     |
-    |  costo_reponer|
-    |  barcode     |
-    |  activo      |
-    |  id_sucursal |
-    |  id_usuario  |
-    |  id_permiso  |
-    +---------------+
-
-    +---------------+
-    |  Usuario_Permisos|
-    +---------------+
-    |  id_usuario  |
-    |  id_permiso  |
-    +---------------+
-    '''
     try:
         with connection:
             con = connection.cursor()
