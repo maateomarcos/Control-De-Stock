@@ -81,7 +81,7 @@ def create_table():
     """
     table_sucursales="""
     CREATE TABLE IF NOT EXISTS sucursales (
-        id_sucursal INT PRIMARY KEY,
+        id_sucursal INTEGER PRIMARY KEY,
         nombre_sucursal VARCHAR(50) NOT NULL,
         direccion_sucursal VARCHAR(100) NOT NULL,
         telefono_sucursal VARCHAR(20) NOT NULL  
@@ -90,10 +90,9 @@ def create_table():
 
     table_usuarios="""
     CREATE TABLE IF NOT EXISTS usuarios (
-        id_usuario INT PRIMARY KEY,
+        id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre_usuario VARCHAR(50) NOT NULL,
         user VARCHAR(50) NOT NULL,
-        email_usuario VARCHAR(100) NOT NULL,
         password_usuario VARCHAR(255) NOT NULL,
         nivel_permiso VARCHAR(20) NOT NULL,
         id_sucursal INT NOT NULL,
@@ -107,9 +106,8 @@ def create_table():
             con.execute(table)
             con.execute(table_sucursales)
             con.execute(table_usuarios)
+
+            
     except Error as e:
         print(e)
 
-
-if __name__ == "__main__":
-    create_table()
