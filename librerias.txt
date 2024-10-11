@@ -1,8 +1,0 @@
-PARA EL FUNCIONAMIENTO CORRECTO DEL CODIGO ES NECESARIO INSTALAR LAS SIGUIENTES LIBRERIAS.
-
-pip install customtkinter
-pip install barcode
-pip install pillow
-pip install python-barcode
-pip install tkcalendar
-pip install awesometkinter

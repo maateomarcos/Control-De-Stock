@@ -3,6 +3,7 @@ from tkinter import ttk
 import customtkinter as ctk
 from datetime import date
 from datetime import datetime
+from PIL import Image, ImageTk
 
 from con_database import *
 from functions_base import *
@@ -471,7 +472,7 @@ class VentanaResumen(FunctionsResumen, FunctionsExtras):
 
         ctk.CTkButton(self.frame_top, text="",
                       width=50,
-                      image=self.image_button("actualizar.png", (34, 34)),  
+                      image=self.image_button("./actualizar.png", (34, 34)),  
                       compound=LEFT, anchor=NW, 
                       fg_color="transparent", 
                       hover_color=("#D3D3D3", "#363636"),

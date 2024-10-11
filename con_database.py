@@ -76,139 +76,38 @@ def create_table():
         activo           TEXT,
         id_sucursal     INTEGER,
         id_permiso      INTEGER,
-        FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal),
-        FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso)
+        FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
     );
     """
     table_sucursales="""
     CREATE TABLE IF NOT EXISTS sucursales (
-        id_sucursal INT PRIMARY KEY,
+        id_sucursal INTEGER PRIMARY KEY,
         nombre_sucursal VARCHAR(50) NOT NULL,
         direccion_sucursal VARCHAR(100) NOT NULL,
         telefono_sucursal VARCHAR(20) NOT NULL  
     );
     """
-    table_permisos = """
-    CREATE TABLE IF NOT EXISTS permisos (
-        id_permiso INT PRIMARY KEY,
-        nombre_permiso VARCHAR(50) NOT NULL,
-        descripcion_permiso TEXT,
-        id_usuario      INTEGER,
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-    );
-    """
+
     table_usuarios="""
     CREATE TABLE IF NOT EXISTS usuarios (
-        id_usuario INT PRIMARY KEY,
+        id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre_usuario VARCHAR(50) NOT NULL,
-        apellido_usuario VARCHAR(50) NOT NULL,
-        email_usuario VARCHAR(100) NOT NULL,
+        user VARCHAR(50) NOT NULL,
         password_usuario VARCHAR(255) NOT NULL,
         nivel_permiso VARCHAR(20) NOT NULL,
         id_sucursal INT NOT NULL,
-        id_permiso INT NOT NULL,
-        FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso),
         FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
     );
     """
-    insert_permisos = """
-    INSERT OR IGNORE INTO permisos (id_permiso, nombre_permiso, descripcion_permiso)
-    VALUES
-    (1, 'Admin', 'Permiso de administrador'),
-    (2, 'Gerente', 'Permiso de gerente'),
-    (3, 'Empleado', 'Permiso de empleado');
-    """
-    table_usuario_permisos = """
-    CREATE TABLE IF NOT EXISTS usuario_permisos (
-        id_usuario INT,
-        id_permiso INT,
-        PRIMARY KEY (id_usuario, id_permiso),
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
-        FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso)
-    );
-    """
 
-    '''
-    COMO QUEDARIA LA BASE DE DATOS (GRAFICADA)
-    +---------------+
-    |  Sucursales  |
-    +---------------+
-    |  id_sucursal  |
-    |  nombre_sucursal|
-    |  direccion_sucursal|
-    |  telefono_sucursal|
-    +---------------+
-
-    +---------------+
-    |  Permisos    |
-    +---------------+
-    |  id_permiso  |
-    |  nombre_permiso|
-    |  descripcion_permiso|
-    +---------------+
-
-    +---------------+
-    |  Usuarios    |
-    +---------------+
-    |  id_usuario  |
-    |  nombre_usuario|
-    |  apellido_usuario|
-    |  email_usuario|
-    |  password_usuario|
-    |  id_permiso  |
-    |  id_sucursal |
-    +---------------+
-
-    +---------------+
-    |  Stock       |
-    +---------------+
-    |  id          |
-    |  producto    |
-    |  grupo       |
-    |  medida      |
-    |  lote        |
-    |  stock       |
-    |  valor_stock |
-    |  stock_mín   |
-    |  status      |
-    |  proveedor   |
-    |  responsable |
-    |  entradas    |
-    |  fecha_entrada|
-    |  costo_unitario|
-    |  costo_total |
-    |  salidas     |
-    |  fecha_salida|
-    |  valor_venta |
-    |  facturación |
-    |  reponer     |
-    |  costo_reponer|
-    |  barcode     |
-    |  activo      |
-    |  id_sucursal |
-    |  id_usuario  |
-    |  id_permiso  |
-    +---------------+
-
-    +---------------+
-    |  Usuario_Permisos|
-    +---------------+
-    |  id_usuario  |
-    |  id_permiso  |
-    +---------------+
-    '''
     try:
         with connection:
             con = connection.cursor()
             con.execute(table)
             con.execute(table_sucursales)
-            con.execute(table_permisos)
             con.execute(table_usuarios)
-            con.execute(insert_permisos)
-            con.execute(table_usuario_permisos)
+
+            
     except Error as e:
         print(e)
 
-
-if __name__ == "__main__":
-    create_table()

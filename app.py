@@ -11,6 +11,9 @@ from con_database import *
 # NOMBRE EMPRESA: HAWK  
 # RUBRO: INDUMENTARIA Y CALZADO  
 
+# PARA EL FUNCIONAMIENTO CORRECTO DEL CODIGO ES NECESARIO INSTALAR LAS SIGUIENTES LIBRERIAS.
+# pip install customtkinter barcode pillow python-barcode tkcalendar awesometkinter
+
 class Application:  
     ''' 
     Constructor de la clase Application 
@@ -24,7 +27,7 @@ class Application:
         self.root = ctk.CTk()  # Crea la ventana principal utilizando customtkinter  
         
         self.layout_config()  # Configura el layout de la ventana  
-        #self.menu_bar()  # Método comentado que añade una barra de menú  (funcion para futuro, sirve para cambiar de blanco a negro y demas, pero hay que tener cuidado  porque si lo apretas muchas veces deja de funcionar, es una funcion admin)
+        self.menu_bar()  # Método comentado que añade una barra de menú  (funcion para futuro, sirve para cambiar de blanco a negro y demas, pero hay que tener cuidado  porque si lo apretas muchas veces deja de funcionar, es una funcion admin)
         self.tabs_application()  # Inicializa las pestañas de la aplicación  
 
         self.root.mainloop()  # Inicia el bucle principal de la aplicación para mantener la ventana abierta  
@@ -34,9 +37,11 @@ class Application:
         Configuración del layout de la ventana principal 
         Se define el título, tamaño y si es redimensionable 
         '''  
-        self.root.title("Administrador de Stock")  # Título de la ventana principal  
-        self.root.geometry("1000x630")  # Tamaño de la ventana principal (ancho x alto)  
-        self.root.resizable(False, False)  # Deshabilita el redimensionamiento de la ventana  
+        self.root.title("Administrador de Stock")  
+        x = (self.root.winfo_screenwidth() // 2) - (1000 // 2)
+        y = (self.root.winfo_screenheight() // 2) - (630 // 2)
+        self.root.geometry(f"1000x630+{x}+{y}")
+        self.root.resizable(False, False)  
 
     def menu_bar(self):  
         ''' 
@@ -137,10 +142,3 @@ class WindowConfig(ctk.CTkToplevel):
                       command=self.destroy  # Cierra la ventana de configuración  
                       ).place(x=185, y=360)  # Botón para cancelar y cerrar la ventana
     
-if __name__ == "__main__":
-    ''' 
-    Punto de entrada de la aplicación 
-    Primero crea las tablas en la base de datos y luego inicia la aplicación principal 
-    '''
-    create_table()  # Llama a la función para crear las tablas necesarias en la base de datos
-    Application()  # Inicia la aplicación principal
